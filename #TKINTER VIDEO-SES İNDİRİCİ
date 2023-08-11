@@ -1,0 +1,72 @@
+#TKINTER VIDEO-SES İNDİRİCİ
+
+from tkinter import *
+import tkinter as tk
+from pytube import YouTube
+
+w=Tk()
+w.title(' video-audio downloader')
+w.geometry("1100x500")  #1100->x 500->y
+
+def video():
+    url=x.get()
+    video=YouTube(url)
+    streams=video.streams.filter().first()
+    print(video.title)
+    videotitle.config(text=f"video title👉{video.title}")
+    videolength.config(text=f"video length👉{video.length}")
+
+    print("dowland...")
+    print("filepath:",streams.download())
+    print("finished")
+
+
+def audio():
+    url=x.get()
+    video=YouTube(url)
+    streams=video.streams.filter(only_audio=True).first()
+    print(video.title)
+    videotitle.config(text=f"video title👉{video.title}")
+    videolength.config(text=f"video length👉{video.length}")
+    print("dowland...")
+    print("filepath:",streams.download())
+    print("finished")
+
+
+def rdn():
+   print(rd.get())
+   return rd.get()
+
+def download():
+    zz=rdn()
+    if zz==1:
+        video()
+        
+
+    elif zz==2:
+        audio()
+ 
+url=Label(text="url 👉👉", font="Verdana 12 ").place(x=250, y=140)
+
+videotitle=Label(text="video title👉", font="Verdana 12 ")
+videotitle.place(x=250, y=250)
+
+videolength=Label(text="video length👉", font="Verdana 12 ")
+videolength.place(x=650, y=250)
+
+x= Entry(width=60,bg="#12ACDE",fg="#DE7812")
+x.place(x=350, y=140)
+
+btn = Button(text="download",command=download).place(x=800, y=140, height=20)
+
+rd=IntVar()
+
+rb1=Radiobutton(text="audio",variable=rd,value=2,command=rdn)
+
+rb2=Radiobutton(text="video",variable=rd,value=1,command=rdn)
+
+rb1.place(x=650, y=140, height=20)
+rb2.place(x=700, y=140, height=20)
+    
+
+w.mainloop()
