@@ -1,0 +1,50 @@
+from tkinter import * 
+import tkinter as tk
+import sqlite3
+
+
+
+
+window=Tk()
+window.title('Tkinter Window ')
+window.geometry('400x400')
+window.config(bg="#0AD8C4")
+
+
+#veri eslestirme
+def z():
+    conn = sqlite3.connect('tkinter.db')   
+    x=conn.cursor()
+    x.execute(" select * from COMPANY")
+    veri=x.fetchall()
+    for i in veri:
+        if i[:][1]==user.get() and i[:][2]==password.get():
+            print("helal")        
+        else:
+            lb.config(text=" hata var")
+
+kullanıcılb=Label(text="user name:")
+kullanıcılb.place(relx=.35,rely=.35)
+
+
+
+        
+
+user=Entry()
+user.place(relx=.55,rely=.35)
+
+sifrelb=Label(text="password:")
+sifrelb.place(relx=.35,rely=.45)
+password=Entry()
+password.place(relx=.55,rely=.45)
+
+btn=Button(text="tıkla",command=z)
+btn.place(relx=.45,rely=.55,relwidth=.15)
+
+
+lb=Label(text="user name:")
+lb.place(relx=.45,rely=.65)
+            
+
+
+window.mainloop()
